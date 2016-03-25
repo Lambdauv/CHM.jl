@@ -8,14 +8,14 @@ A Julia package for extracting information from compiled help files (.chm).
 
 This package requires a shared library. In the `deps` folder you can find a `.dll`
 file which may or may not work for your computer. Below you can find instructions
-on how I compiled it.
+on how I compiled it. You will need to install the .dll file manually for now.
 
 ### Compiling ChmLib.dll on Windows 10
 
 Prerequisites: Installation of Visual Studio Community 2015 or comparable. It
 is a free download.
 
-1. Download and extract a .zip file of [ChmLib][https://github.com/jedwing/CHMLib].
+1. Download and extract a .zip file of [ChmLib](https://github.com/jedwing/CHMLib).
 2. Inside there is another .zip file: `ChmLib-ds6.zip`. Extract that.
 3. Open `ChmLib.dsw` in Visual Studio Community 2015.
 4. Accept notice of the one-way upgrade (this project file is many years out of date).
@@ -25,7 +25,7 @@ the directory `ChmLib-ds6`.
 the directory `ChmLib-ds6` (overwrite the old file).
 7. In the "Solution Explorer" of VS Community 2015, right-click on ChmLib and
 select Properties...
-8. Click `Configuration Manager...`
+8. Click Configuration Manager...
 9. Active solution configuration --> release
 10. Active solution platform --> New...
 11. New platform --> x64, copy settings from x86.
