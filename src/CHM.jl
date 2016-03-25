@@ -21,7 +21,10 @@ const CHM_ENUMERATOR_FAILURE  = 0
 const CHM_ENUMERATOR_CONTINUE = 1
 const CHM_ENUMERATOR_SUCCESS  = 2
 
-typealias CHMFile Ptr{Void}
+type CHMFile end
+
+global names = ASCIIString[]
+global flags = Cint[]
 
 cchars = Expr(:block)
 for i in 1:(CHM_MAX_PATHLEN+1)
@@ -38,34 +41,100 @@ eval(quote
     end
 end)
 
+CHMUnitInfo() = CHMUnitInfo(0,0,0,0,repeat([Cchar(0)],inner=[513])...)
+
 "Open a file with CHMLib."
 function open(path::ASCIIString)
-    ccall((:chm_open, "ChmLib"), CHMFile, (Ptr{UInt8},), path)
+    ccall((:chm_open, "ChmLib"), Ptr{CHMFile}, (Ptr{UInt8},), path)
 end
 
 "Close a file with CHMLib."
-function close(ptr::CHMFile)
-    ccall((:chm_open, "ChmLib"), Void, (CHMFile,), ptr)
+function close(ptr::Ptr{CHMFile})
+    ccall((:chm_close, "ChmLib"), Void, (Ptr{CHMFile},), ptr)
 end
 
-function d(ptr::Ptr{Void})
-    a = []
-    enumdir_c = cfunction(enumdir(a), Cint, (CHMFile, Ptr{CHMUnitInfo}, Ptr{Void}))
-    ccall((:chm_enumerate_dir, "ChmLib"), Cint,
-        (CHMFile, Cint, Ptr{Void}, Ptr{Void}),
-        ptr, CHM_ENUMERATE_ALL, enumdir_c, C_NULL)
-    a
+""""
+Returns true if `path` in the .chm file resolves to a file, else false.
+"""
+function resolve(ptr::Ptr{CHMFile}, path::ASCIIString)
+    u = CHMUnitInfo()
+    result = ccall((:chm_resolve_object, "ChmLib"), Cint,
+        (Ptr{CHMFile}, Ptr{UInt8}, Ref{CHMUnitInfo}), ptr, path, Ref{CHMUnitInfo}(u))
+    return (result != CHM_RESOLVE_FAILURE)
 end
 
-function enumdir(a::AbstractArray)
-    return (f::CHMFile, u::Ptr{CHMUnitInfo}, context::Ptr{Void})->begin
-        io = IOBuffer()
-        for i in (1:(CHM_MAX_PATHLEN+1)) + 4
-            write(io, u.(i))
+"""
+Returns a `CHMUnitData` object for the file at `path` within the .chm file.
+"""
+function unitdata(ptr::Ptr{CHMFile}, path::ASCIIString)
+    !resolve(ptr, path) && error("Could not resolve path.")
+    u = CHMUnitInfo()
+    result = ccall((:chm_resolve_object, "ChmLib"), Cint,
+        (Ptr{CHMFile}, Ptr{UInt8}, Ref{CHMUnitInfo}), ptr, path, Ref{CHMUnitInfo}(u))
+    return u
+end
+
+"""
+Returns a string containing the contents of a text file at `path` within the .chm file.
+"""
+function retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
+    stuff = []
+
+    bufsize = 32768
+    buffer = Array{Cuchar,1}(bufsize)
+    offset = Culonglong(0)
+    io = IOBuffer()
+
+    !resolve(ptr, path) && error("Could not resolve path.")
+    u = unitdata(ptr, path)
+    remain = u.length
+    while remain > 0
+        len = ccall((:chm_retrieve_object, "ChmLib"), Clonglong,
+            (Ptr{CHMFile}, Ref{CHMUnitInfo}, Ptr{Cuchar}, Culonglong, Clonglong),
+            ptr, Ref{CHMUnitInfo}(u), buffer, offset, bufsize)
+
+        if len > 0
+            write(io, buffer[1:len]...)
+            offset += len
+            remain -= len
+        else
+            error("Incomplete file.")
         end
-        push!(a, takebuf_string(io))
-        return convert(Cint, CHM_ENUMERATOR_CONTINUE)::Cint
     end
+    ASCIIString(takebuf_array(io))
+end
+
+"""
+Read the contents of a given directory in the CHM file.
+Use UNIX path conventions. Root level is "/".
+
+Returns the file and directory names.
+"""
+function readdir(ptr::Ptr{CHMFile}, path::ASCIIString)
+    global names = ASCIIString[]
+    global flags = Cint[]
+    enumdir_c = cfunction(enumdir, Cint, (Ptr{CHMFile}, Ptr{CHMUnitInfo}, Ptr{Void}))
+    ccall((:chm_enumerate_dir, "ChmLib"), Cint,
+        (Ptr{CHMFile}, Ptr{UInt8}, Cint, Ptr{Void}, Ptr{Void}),
+        ptr, path, CHM_ENUMERATE_ALL, enumdir_c, C_NULL)
+    names
+end
+
+# When closures are c-callable, this could be re-written to avoid the global.
+function enumdir(f::Ptr{CHMFile}, pu::Ptr{CHMUnitInfo}, context::Ptr{Void})
+    global names
+    global flags
+    u = unsafe_load(pu)
+    io = IOBuffer()
+    for i in (1:(CHM_MAX_PATHLEN+1)) + 4
+        if u.(i) == '\0'
+            break
+        end
+        write(io, u.(i))
+    end
+    push!(names, takebuf_string(io))
+    push!(flags, u.flags)
+    return convert(Cint, CHM_ENUMERATOR_CONTINUE)::Cint
 end
 
 end # module
