@@ -1,5 +1,8 @@
 module CHM
 
+# Make sure we can find the .dylib file on OS X.
+@osx_only push!(Libdl.DL_LOAD_PATH, joinpath(Pkg.dir("CHM"), "deps"))
+
 # CHMLib constants
 const CHM_UNCOMPRESSED = 0
 const CHM_COMPRESSED   = 1
@@ -21,6 +24,9 @@ const CHM_ENUMERATOR_FAILURE  = 0
 const CHM_ENUMERATOR_CONTINUE = 1
 const CHM_ENUMERATOR_SUCCESS  = 2
 
+"""
+Custom type for dispatching only. Not needed by user.
+"""
 type CHMFile end
 
 global names = ASCIIString[]
@@ -31,7 +37,7 @@ for i in 1:(CHM_MAX_PATHLEN+1)
     push!(cchars.args, :($(gensym())::Cchar))
 end
 
-eval(quote
+eval(CHM, quote
     type CHMUnitInfo
         start::Culonglong
         length::Culonglong
@@ -43,18 +49,35 @@ end)
 
 CHMUnitInfo() = CHMUnitInfo(0,0,0,0,repeat([Cchar(0)],inner=[513])...)
 
-"Open a file with CHMLib."
+docstr = """
+Julia type wrapper for a C struct from CHMLib that contains information on
+metadata for an object within the .chm file.
+"""
+
+@doc docstr CHMUnitInfo
+
+"""
+`open(path::ASCIIString)`
+
+Open a file with CHMLib.
+"""
 function open(path::ASCIIString)
     ccall((:chm_open, "ChmLib"), Ptr{CHMFile}, (Ptr{UInt8},), path)
 end
 
-"Close a file with CHMLib."
+"""
+`close(ptr::Ptr{CHMFile})`
+
+Close a file with CHMLib.
+"""
 function close(ptr::Ptr{CHMFile})
     ccall((:chm_close, "ChmLib"), Void, (Ptr{CHMFile},), ptr)
 end
 
-""""
-Returns true if `path` in the .chm file resolves to a file, else false.
+"""
+`resolve(ptr::Ptr{CHMFile}, path::ASCIIString)`
+
+Returns `true` if `path` in the .chm file resolves to a file, else `false`.
 """
 function resolve(ptr::Ptr{CHMFile}, path::ASCIIString)
     u = CHMUnitInfo()
@@ -64,9 +87,11 @@ function resolve(ptr::Ptr{CHMFile}, path::ASCIIString)
 end
 
 """
-Returns a `CHMUnitData` object for the file at `path` within the .chm file.
+`unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)`
+
+Returns a `CHMUnitInfo` object for the file at `path` within the .chm file.
 """
-function unitdata(ptr::Ptr{CHMFile}, path::ASCIIString)
+function unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)
     !resolve(ptr, path) && error("Could not resolve path.")
     u = CHMUnitInfo()
     result = ccall((:chm_resolve_object, "ChmLib"), Cint,
@@ -75,6 +100,8 @@ function unitdata(ptr::Ptr{CHMFile}, path::ASCIIString)
 end
 
 """
+`retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)`
+
 Returns a string containing the contents of a text file at `path` within the .chm file.
 """
 function retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
@@ -86,7 +113,7 @@ function retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
     io = IOBuffer()
 
     !resolve(ptr, path) && error("Could not resolve path.")
-    u = unitdata(ptr, path)
+    u = unitinfo(ptr, path)
     remain = u.length
     while remain > 0
         len = ccall((:chm_retrieve_object, "ChmLib"), Clonglong,
@@ -105,9 +132,10 @@ function retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
 end
 
 """
+`readdir(ptr::Ptr{CHMFile}, path::ASCIIString)`
+
 Read the contents of a given directory in the CHM file.
 Use UNIX path conventions. Root level is "/".
-
 Returns the file and directory names.
 """
 function readdir(ptr::Ptr{CHMFile}, path::ASCIIString)
