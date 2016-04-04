@@ -6,9 +6,10 @@ A Julia package for extracting information from compiled help files (.chm).
 
 ## Usage
 
-This package requires a shared library. In the `deps` folder you can find a `.dll`
-file which may or may not work for your computer. Below you can find instructions
-on how I compiled it. You will need to install the .dll file manually for now.
+This package requires a shared library. In the `deps` folder you can find a .dll
+file for Windows and a .dylib file for Mac OS X, either of which may or may not
+work for your computer. Below you can find instructions on how I compiled them.
+You will need to install the .dll file manually for now.
 
 ### Compiling ChmLib.dll on Windows 10
 
@@ -39,5 +40,13 @@ list at the left you should select Configuration Properties -> General.
 17. Verify in the output that you built Release x64 and a .dll file was
 generated.
 18. From `ChmLib-ds6\x64\Release` copy the .dll file to `C:\Windows\System32`.
+19. Enjoy
 
-You should be good to go.
+### Compiling ChmLib.dylib on Mac OS X 10.11
+
+1. Download and extract a .zip file of [ChmLib](https://github.com/jedwing/CHMLib).
+2. From the Terminal, change paths to the `src` folder inside.
+3. Run: `gcc -c -fpic chm_lib.c chm_lib.h lzx.c lzx.h`
+4. Run: `gcc -dynamiclib -o ChmLib.dylib chm_lib.o lzx.o`
+5. Copy the resulting `ChmLib.dylib` to the `deps` folder of this package.
+6. Enjoy
