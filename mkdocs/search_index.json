@@ -1,0 +1,64 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "CHM.jl\n\n\nA \nJulia\n package for extracting information from compiled help files (.chm).\n\n\n\n\nInstallation\n\n\n\n\nPkg.clone(\"https://github.com/ajkeller34/CHM.jl.git\")\n\n\nThis package requires a shared library. In the \ndeps\n folder you can find a .dll file for Windows and a .dylib file for Mac OS X, either of which may or may not work for your computer. You will need to install the .dll file manually for now.\n\n\n\n\n\n\nQuick start\n\n\nusing CHM\nf = CHM.open(\n/path/to/file.chm\n)\nCHM.readdir(f, \n/\n)\nCHM.close(f)", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#chmjl", 
+            "text": "A  Julia  package for extracting information from compiled help files (.chm).", 
+            "title": "CHM.jl"
+        }, 
+        {
+            "location": "/#installation", 
+            "text": "Pkg.clone(\"https://github.com/ajkeller34/CHM.jl.git\")  This package requires a shared library. In the  deps  folder you can find a .dll file for Windows and a .dylib file for Mac OS X, either of which may or may not work for your computer. You will need to install the .dll file manually for now.", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/#quick-start", 
+            "text": "using CHM\nf = CHM.open( /path/to/file.chm )\nCHM.readdir(f,  / )\nCHM.close(f)", 
+            "title": "Quick start"
+        }, 
+        {
+            "location": "/api/", 
+            "text": "Note that nothing in this package is exported.\n\n\n\n\nIndex\n\n\n\n\nCHM.CHMFile\n\n\nCHM.CHMUnitInfo\n\n\nCHM.close\n\n\nCHM.open\n\n\nCHM.readdir\n\n\nCHM.resolve\n\n\nCHM.retrieve\n\n\nCHM.unitinfo\n\n\n\n\n\n\nTypes\n\n\n#\n\n\nCHM.CHMFile\n \n \nType\n.\n\n\n\n\nCustom type for dispatching only. Not needed by user.\n\n\n#\n\n\nCHM.CHMUnitInfo\n \n \nType\n.\n\n\n\n\n\"Julia type wrapper for a C struct from CHMLib that contains information on\\nmetadata for an object within the .chm file.\\n\"\n\n\n\n\nFunctions\n\n\n#\n\n\nCHM.close\n \n \nFunction\n.\n\n\n\n\nclose(ptr::Ptr{CHMFile})\n\n\nClose a file with CHMLib.\n\n\n#\n\n\nCHM.open\n \n \nFunction\n.\n\n\n\n\nopen(path::ASCIIString)\n\n\nOpen a file with CHMLib.\n\n\n#\n\n\nCHM.readdir\n \n \nFunction\n.\n\n\n\n\nreaddir(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nRead the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is \"/\". Returns the file and directory names.\n\n\n#\n\n\nCHM.resolve\n \n \nFunction\n.\n\n\n\n\nresolve(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nReturns \ntrue\n if \npath\n in the .chm file resolves to a file, else \nfalse\n.\n\n\n#\n\n\nCHM.retrieve\n \n \nFunction\n.\n\n\n\n\nretrieve(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nReturns a string containing the contents of a text file at \npath\n within the .chm file.\n\n\n#\n\n\nCHM.unitinfo\n \n \nFunction\n.\n\n\n\n\nunitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nReturns a \nCHMUnitInfo\n object for the file at \npath\n within the .chm file.", 
+            "title": "API"
+        }, 
+        {
+            "location": "/api/#index", 
+            "text": "CHM.CHMFile  CHM.CHMUnitInfo  CHM.close  CHM.open  CHM.readdir  CHM.resolve  CHM.retrieve  CHM.unitinfo", 
+            "title": "Index"
+        }, 
+        {
+            "location": "/api/#types", 
+            "text": "#  CHM.CHMFile     Type .   Custom type for dispatching only. Not needed by user.  #  CHM.CHMUnitInfo     Type .   \"Julia type wrapper for a C struct from CHMLib that contains information on\\nmetadata for an object within the .chm file.\\n\"", 
+            "title": "Types"
+        }, 
+        {
+            "location": "/api/#functions", 
+            "text": "#  CHM.close     Function .   close(ptr::Ptr{CHMFile})  Close a file with CHMLib.  #  CHM.open     Function .   open(path::ASCIIString)  Open a file with CHMLib.  #  CHM.readdir     Function .   readdir(ptr::Ptr{CHMFile}, path::ASCIIString)  Read the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is \"/\". Returns the file and directory names.  #  CHM.resolve     Function .   resolve(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns  true  if  path  in the .chm file resolves to a file, else  false .  #  CHM.retrieve     Function .   retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns a string containing the contents of a text file at  path  within the .chm file.  #  CHM.unitinfo     Function .   unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns a  CHMUnitInfo  object for the file at  path  within the .chm file.", 
+            "title": "Functions"
+        }, 
+        {
+            "location": "/compiling/", 
+            "text": "Compiling ChmLib.dll on Windows 10\n\n\nPrerequisites: Installation of Visual Studio Community 2015 or comparable. It is a free download.\n\n\n\n\nDownload and extract a .zip file of \nChmLib\n.\n\n\nInside there is another .zip file: \nChmLib-ds6.zip\n. Extract that.\n\n\nOpen \nChmLib.dsw\n in Visual Studio Community 2015.\n\n\nAccept notice of the one-way upgrade (this project file is many years out of date).\n\n\nBack in the file explorer, copy everything from \nCHMLib-master/src\n into the directory \nChmLib-ds6\n.\n\n\nCopy the modified \nchm_lib.h\n from \ndeps/chm_lib.h\n in this package into the directory \nChmLib-ds6\n (overwrite the old file).\n\n\nIn the \"Solution Explorer\" of VS Community 2015, right-click on ChmLib and select Properties...\n\n\nClick Configuration Manager...\n\n\nActive solution configuration \u2013\n release\n\n\nActive solution platform \u2013\n New...\n\n\nNew platform \u2013\n x64, copy settings from x86.\n\n\nMake sure that project ChmLib is configured for Release and x64. Close the Configuration Manager.\n\n\nYou should be back at a window ChmLib Property Pages. In the list at the left you should select Configuration Properties -\n General.\n\n\nChange Project Defaults -\n Configuration Type -\n Dynamic Library (.dll).\n\n\nApply and OK.\n\n\nRight click ChmLib in Solution Explorer and choose Build.\n\n\nVerify in the output that you built Release x64 and a .dll file was generated.\n\n\nFrom \nChmLib-ds6\\x64\\Release\n copy the .dll file to \nC:\\Windows\\System32\n.\n\n\nEnjoy\n\n\n\n\n\n\nCompiling ChmLib.dylib on Mac OS X 10.11\n\n\n\n\nDownload and extract a .zip file of \nChmLib\n.\n\n\nFrom the Terminal, change paths to the \nsrc\n folder inside.\n\n\nRun: \ngcc -c -fpic chm_lib.c chm_lib.h lzx.c lzx.h\n\n\nRun: \ngcc -dynamiclib -o ChmLib.dylib chm_lib.o lzx.o\n\n\nCopy the resulting \nChmLib.dylib\n to the \ndeps\n folder of this package.\n\n\nEnjoy", 
+            "title": "Compilation advice"
+        }, 
+        {
+            "location": "/compiling/#compiling-chmlibdll-on-windows-10", 
+            "text": "Prerequisites: Installation of Visual Studio Community 2015 or comparable. It is a free download.   Download and extract a .zip file of  ChmLib .  Inside there is another .zip file:  ChmLib-ds6.zip . Extract that.  Open  ChmLib.dsw  in Visual Studio Community 2015.  Accept notice of the one-way upgrade (this project file is many years out of date).  Back in the file explorer, copy everything from  CHMLib-master/src  into the directory  ChmLib-ds6 .  Copy the modified  chm_lib.h  from  deps/chm_lib.h  in this package into the directory  ChmLib-ds6  (overwrite the old file).  In the \"Solution Explorer\" of VS Community 2015, right-click on ChmLib and select Properties...  Click Configuration Manager...  Active solution configuration \u2013  release  Active solution platform \u2013  New...  New platform \u2013  x64, copy settings from x86.  Make sure that project ChmLib is configured for Release and x64. Close the Configuration Manager.  You should be back at a window ChmLib Property Pages. In the list at the left you should select Configuration Properties -  General.  Change Project Defaults -  Configuration Type -  Dynamic Library (.dll).  Apply and OK.  Right click ChmLib in Solution Explorer and choose Build.  Verify in the output that you built Release x64 and a .dll file was generated.  From  ChmLib-ds6\\x64\\Release  copy the .dll file to  C:\\Windows\\System32 .  Enjoy", 
+            "title": "Compiling ChmLib.dll on Windows 10"
+        }, 
+        {
+            "location": "/compiling/#compiling-chmlibdylib-on-mac-os-x-1011", 
+            "text": "Download and extract a .zip file of  ChmLib .  From the Terminal, change paths to the  src  folder inside.  Run:  gcc -c -fpic chm_lib.c chm_lib.h lzx.c lzx.h  Run:  gcc -dynamiclib -o ChmLib.dylib chm_lib.o lzx.o  Copy the resulting  ChmLib.dylib  to the  deps  folder of this package.  Enjoy", 
+            "title": "Compiling ChmLib.dylib on Mac OS X 10.11"
+        }, 
+        {
+            "location": "/LICENSE/", 
+            "text": "The Julia code in the CHM.jl package is licensed under the MIT \"Expat\" License:\n\n\n\n\nCopyright (c) 2016: Andrew Keller.\n\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n\n\nThe \ndeps/chm_lib.h\n file is modified from \nCHMLib\n, (c) Jed Wing under GNU LPGL 2.1 license. \ndeps/ChmLib.dll\n has compiled using this modified header file and all the other unmodified files from CHMLib. \ndeps/ChmLib.dylib\n has been compiled using unmodified files from CHMLib. These CHM.jl dependencies are redistributed here for convenience under their respective licenses.", 
+            "title": "License"
+        }
+    ]
+}

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>API - CHM.jl</title>
+      
+      
+      
+      
+        <meta name="author" content="Andrew Keller">
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="CHM.jl">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="CHM.jl">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../None">
+    <link rel="icon" type="image/x-icon" href="../None">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-54f87043f3.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/Documenter.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-indigo palette-accent-blue">
+    
+      
+      
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        API
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="https://github.com/ajkeller34/CHM.jl" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          CHM.jl
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+          <br>
+          ajkeller34/CHM.jl
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            
+            <a href="https://github.com/ajkeller34/CHM.jl/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/ajkeller34/CHM.jl/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="API" href="./">
+      API
+    </a>
+    
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Index" href="#index">
+                Index
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Types" href="#types">
+                Types
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Functions" href="#functions">
+                Functions
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Compilation advice" href="../compiling/">
+      Compilation advice
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../LICENSE/">
+      License
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+            <h1>API</h1>
+          
+          <p>Note that nothing in this package is exported.</p>
+<p><a id='Index-1'></a></p>
+<h2 id="index">Index</h2>
+<ul>
+<li><a href="./#CHM.CHMFile"><code>CHM.CHMFile</code></a></li>
+<li><a href="./#CHM.CHMUnitInfo"><code>CHM.CHMUnitInfo</code></a></li>
+<li><a href="./#CHM.close"><code>CHM.close</code></a></li>
+<li><a href="./#CHM.open"><code>CHM.open</code></a></li>
+<li><a href="./#CHM.readdir"><code>CHM.readdir</code></a></li>
+<li><a href="./#CHM.resolve"><code>CHM.resolve</code></a></li>
+<li><a href="./#CHM.retrieve"><code>CHM.retrieve</code></a></li>
+<li><a href="./#CHM.unitinfo"><code>CHM.unitinfo</code></a></li>
+</ul>
+<p><a id='Types-1'></a></p>
+<h2 id="types">Types</h2>
+<p><a id='CHM.CHMFile' href='#CHM.CHMFile'>#</a>
+<strong><code>CHM.CHMFile</code></strong> &mdash; <em>Type</em>.</p>
+<hr />
+<p>Custom type for dispatching only. Not needed by user.</p>
+<p><a id='CHM.CHMUnitInfo' href='#CHM.CHMUnitInfo'>#</a>
+<strong><code>CHM.CHMUnitInfo</code></strong> &mdash; <em>Type</em>.</p>
+<hr />
+<p>"Julia type wrapper for a C struct from CHMLib that contains information on\nmetadata for an object within the .chm file.\n"</p>
+<p><a id='Functions-1'></a></p>
+<h2 id="functions">Functions</h2>
+<p><a id='CHM.close' href='#CHM.close'>#</a>
+<strong><code>CHM.close</code></strong> &mdash; <em>Function</em>.</p>
+<hr />
+<p><code>close(ptr::Ptr{CHMFile})</code></p>
+<p>Close a file with CHMLib.</p>
+<p><a id='CHM.open' href='#CHM.open'>#</a>
+<strong><code>CHM.open</code></strong> &mdash; <em>Function</em>.</p>
+<hr />
+<p><code>open(path::ASCIIString)</code></p>
+<p>Open a file with CHMLib.</p>
+<p><a id='CHM.readdir' href='#CHM.readdir'>#</a>
+<strong><code>CHM.readdir</code></strong> &mdash; <em>Function</em>.</p>
+<hr />
+<p><code>readdir(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<p>Read the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is "/". Returns the file and directory names.</p>
+<p><a id='CHM.resolve' href='#CHM.resolve'>#</a>
+<strong><code>CHM.resolve</code></strong> &mdash; <em>Function</em>.</p>
+<hr />
+<p><code>resolve(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<p>Returns <code>true</code> if <code>path</code> in the .chm file resolves to a file, else <code>false</code>.</p>
+<p><a id='CHM.retrieve' href='#CHM.retrieve'>#</a>
+<strong><code>CHM.retrieve</code></strong> &mdash; <em>Function</em>.</p>
+<hr />
+<p><code>retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<p>Returns a string containing the contents of a text file at <code>path</code> within the .chm file.</p>
+<p><a id='CHM.unitinfo' href='#CHM.unitinfo'>#</a>
+<strong><code>CHM.unitinfo</code></strong> &mdash; <em>Function</em>.</p>
+<hr />
+<p><code>unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<p>Returns a <code>CHMUnitInfo</code> object for the file at <code>path</code> within the .chm file.</p>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href=".." title="Home">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Home
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../compiling/" title="Compilation advice">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Compilation advice
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = 'ajkeller34/CHM.jl';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+      <script src="../assets/mathjaxhelper.js"></script>
+    
+    
+  </body>
+</html>
