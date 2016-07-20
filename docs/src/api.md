@@ -1,18 +1,21 @@
 Note that nothing in this package is exported.
 
 ## Index
-    {index}
+```@index
+```
 
 ## Types
-    {docs}
-    CHM.CHMFile
-    CHM.CHMUnitInfo
+```@docs
+CHM.CHMFile
+CHM.CHMUnitInfo
+```
 
 ## Functions
-    {docs}
-    CHM.close
-    CHM.open
-    CHM.readdir
-    CHM.resolve
-    CHM.retrieve
-    CHM.unitinfo
+```@docs
+CHM.close
+CHM.open
+CHM.readdir
+CHM.resolve
+CHM.retrieve
+CHM.unitinfo
+```
