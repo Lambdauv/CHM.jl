@@ -1,5 +1,5 @@
 site_name:        CHM.jl
-repo_url:         https://github.com/ajkeller34/CHM.jl
+repo_url:         https://github.com/PainterQubits/CHM.jl
 site_description: Package for extracting information from compiled help files (.chm).
 site_author:      Andrew Keller
 

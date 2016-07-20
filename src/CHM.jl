@@ -25,6 +25,10 @@ const CHM_ENUMERATOR_CONTINUE = 1
 const CHM_ENUMERATOR_SUCCESS  = 2
 
 """
+```
+type CHMFile
+```
+
 Custom type for dispatching only. Not needed by user.
 """
 type CHMFile end
@@ -49,15 +53,20 @@ end)
 
 CHMUnitInfo() = CHMUnitInfo(0,0,0,0,repeat([Cchar(0)],inner=[513])...)
 
-docstr = """
+"""
+```
+type CHMUnitInfo
+```
+
 Julia type wrapper for a C struct from CHMLib that contains information on
 metadata for an object within the .chm file.
 """
-
-@doc docstr CHMUnitInfo
+CHMUnitInfo
 
 """
-`open(path::ASCIIString)`
+```
+open(path::ASCIIString)
+```
 
 Open a file with CHMLib.
 """
@@ -66,7 +75,9 @@ function open(path::ASCIIString)
 end
 
 """
-`close(ptr::Ptr{CHMFile})`
+```
+close(ptr::Ptr{CHMFile})
+```
 
 Close a file with CHMLib.
 """
@@ -75,7 +86,9 @@ function close(ptr::Ptr{CHMFile})
 end
 
 """
-`resolve(ptr::Ptr{CHMFile}, path::ASCIIString)`
+```
+resolve(ptr::Ptr{CHMFile}, path::ASCIIString)
+```
 
 Returns `true` if `path` in the .chm file resolves to a file, else `false`.
 """
@@ -87,7 +100,9 @@ function resolve(ptr::Ptr{CHMFile}, path::ASCIIString)
 end
 
 """
-`unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)`
+```
+unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)
+```
 
 Returns a `CHMUnitInfo` object for the file at `path` within the .chm file.
 """
@@ -100,7 +115,9 @@ function unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)
 end
 
 """
-`retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)`
+```
+retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
+```
 
 Returns a string containing the contents of a text file at `path` within the .chm file.
 """
@@ -132,7 +149,9 @@ function retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
 end
 
 """
-`readdir(ptr::Ptr{CHMFile}, path::ASCIIString)`
+```
+readdir(ptr::Ptr{CHMFile}, path::ASCIIString)
+```
 
 Read the contents of a given directory in the CHM file.
 Use UNIX path conventions. Root level is "/".
