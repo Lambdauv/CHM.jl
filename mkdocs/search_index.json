@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "CHM.jl\n\n\nA \nJulia\n package for extracting information from compiled help files (.chm).\n\n\n\n\nInstallation\n\n\n\n\nPkg.clone(\"https://github.com/ajkeller34/CHM.jl.git\")\n\n\nThis package requires a shared library. In the \ndeps\n folder you can find a .dll file for Windows and a .dylib file for Mac OS X, either of which may or may not work for your computer. You will need to install the .dll file manually for now.\n\n\n\n\n\n\nQuick start\n\n\nusing CHM\nf = CHM.open(\n/path/to/file.chm\n)\nCHM.readdir(f, \n/\n)\nCHM.close(f)", 
+            "text": "CHM.jl\n\n\nA \nJulia\n package for extracting information from compiled help files (.chm).\n\n\n\n\nInstallation\n\n\n\n\nPkg.clone(\"https://github.com/PainterQubits/CHM.jl.git\")\n\n\nThis package requires a shared library. In the \ndeps\n folder you can find a .dll file for Windows and a .dylib file for Mac OS X, either of which may or may not work for your computer. You will need to install the .dll file manually for now.\n\n\n\n\n\n\nQuick start\n\n\nusing CHM\nf = CHM.open(\n/path/to/file.chm\n)\nCHM.readdir(f, \n/\n)\nCHM.close(f)", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/#installation", 
-            "text": "Pkg.clone(\"https://github.com/ajkeller34/CHM.jl.git\")  This package requires a shared library. In the  deps  folder you can find a .dll file for Windows and a .dylib file for Mac OS X, either of which may or may not work for your computer. You will need to install the .dll file manually for now.", 
+            "text": "Pkg.clone(\"https://github.com/PainterQubits/CHM.jl.git\")  This package requires a shared library. In the  deps  folder you can find a .dll file for Windows and a .dylib file for Mac OS X, either of which may or may not work for your computer. You will need to install the .dll file manually for now.", 
             "title": "Installation"
         }, 
         {
@@ -22,7 +22,7 @@
         }, 
         {
             "location": "/api/", 
-            "text": "Note that nothing in this package is exported.\n\n\n\n\nIndex\n\n\n\n\nCHM.CHMFile\n\n\nCHM.CHMUnitInfo\n\n\nCHM.close\n\n\nCHM.open\n\n\nCHM.readdir\n\n\nCHM.resolve\n\n\nCHM.retrieve\n\n\nCHM.unitinfo\n\n\n\n\n\n\nTypes\n\n\n#\n\n\nCHM.CHMFile\n \n \nType\n.\n\n\n\n\nCustom type for dispatching only. Not needed by user.\n\n\n#\n\n\nCHM.CHMUnitInfo\n \n \nType\n.\n\n\n\n\n\"Julia type wrapper for a C struct from CHMLib that contains information on\\nmetadata for an object within the .chm file.\\n\"\n\n\n\n\nFunctions\n\n\n#\n\n\nCHM.close\n \n \nFunction\n.\n\n\n\n\nclose(ptr::Ptr{CHMFile})\n\n\nClose a file with CHMLib.\n\n\n#\n\n\nCHM.open\n \n \nFunction\n.\n\n\n\n\nopen(path::ASCIIString)\n\n\nOpen a file with CHMLib.\n\n\n#\n\n\nCHM.readdir\n \n \nFunction\n.\n\n\n\n\nreaddir(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nRead the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is \"/\". Returns the file and directory names.\n\n\n#\n\n\nCHM.resolve\n \n \nFunction\n.\n\n\n\n\nresolve(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nReturns \ntrue\n if \npath\n in the .chm file resolves to a file, else \nfalse\n.\n\n\n#\n\n\nCHM.retrieve\n \n \nFunction\n.\n\n\n\n\nretrieve(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nReturns a string containing the contents of a text file at \npath\n within the .chm file.\n\n\n#\n\n\nCHM.unitinfo\n \n \nFunction\n.\n\n\n\n\nunitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\nReturns a \nCHMUnitInfo\n object for the file at \npath\n within the .chm file.", 
+            "text": "Note that nothing in this package is exported.\n\n\n\n\nIndex\n\n\n\n\nCHM.CHMFile\n\n\nCHM.CHMUnitInfo\n\n\nCHM.close\n\n\nCHM.open\n\n\nCHM.readdir\n\n\nCHM.resolve\n\n\nCHM.retrieve\n\n\nCHM.unitinfo\n\n\n\n\n\n\nTypes\n\n\n#\n\n\nCHM.CHMFile\n \n \nType\n.\n\n\ntype CHMFile\n\n\n\n\n\nCustom type for dispatching only. Not needed by user.\n\n\n#\n\n\nCHM.CHMUnitInfo\n \n \nType\n.\n\n\ntype CHMUnitInfo\n\n\n\n\n\nJulia type wrapper for a C struct from CHMLib that contains information on metadata for an object within the .chm file.\n\n\n\n\nFunctions\n\n\n#\n\n\nCHM.close\n \n \nFunction\n.\n\n\nclose(ptr::Ptr{CHMFile})\n\n\n\n\n\nClose a file with CHMLib.\n\n\n#\n\n\nCHM.open\n \n \nFunction\n.\n\n\nopen(path::ASCIIString)\n\n\n\n\n\nOpen a file with CHMLib.\n\n\n#\n\n\nCHM.readdir\n \n \nFunction\n.\n\n\nreaddir(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\n\n\n\nRead the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is \"/\". Returns the file and directory names.\n\n\n#\n\n\nCHM.resolve\n \n \nFunction\n.\n\n\nresolve(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\n\n\n\nReturns \ntrue\n if \npath\n in the .chm file resolves to a file, else \nfalse\n.\n\n\n#\n\n\nCHM.retrieve\n \n \nFunction\n.\n\n\nretrieve(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\n\n\n\nReturns a string containing the contents of a text file at \npath\n within the .chm file.\n\n\n#\n\n\nCHM.unitinfo\n \n \nFunction\n.\n\n\nunitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)\n\n\n\n\n\nReturns a \nCHMUnitInfo\n object for the file at \npath\n within the .chm file.", 
             "title": "API"
         }, 
         {
@@ -32,12 +32,12 @@
         }, 
         {
             "location": "/api/#types", 
-            "text": "#  CHM.CHMFile     Type .   Custom type for dispatching only. Not needed by user.  #  CHM.CHMUnitInfo     Type .   \"Julia type wrapper for a C struct from CHMLib that contains information on\\nmetadata for an object within the .chm file.\\n\"", 
+            "text": "#  CHM.CHMFile     Type .  type CHMFile  Custom type for dispatching only. Not needed by user.  #  CHM.CHMUnitInfo     Type .  type CHMUnitInfo  Julia type wrapper for a C struct from CHMLib that contains information on metadata for an object within the .chm file.", 
             "title": "Types"
         }, 
         {
             "location": "/api/#functions", 
-            "text": "#  CHM.close     Function .   close(ptr::Ptr{CHMFile})  Close a file with CHMLib.  #  CHM.open     Function .   open(path::ASCIIString)  Open a file with CHMLib.  #  CHM.readdir     Function .   readdir(ptr::Ptr{CHMFile}, path::ASCIIString)  Read the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is \"/\". Returns the file and directory names.  #  CHM.resolve     Function .   resolve(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns  true  if  path  in the .chm file resolves to a file, else  false .  #  CHM.retrieve     Function .   retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns a string containing the contents of a text file at  path  within the .chm file.  #  CHM.unitinfo     Function .   unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns a  CHMUnitInfo  object for the file at  path  within the .chm file.", 
+            "text": "#  CHM.close     Function .  close(ptr::Ptr{CHMFile})  Close a file with CHMLib.  #  CHM.open     Function .  open(path::ASCIIString)  Open a file with CHMLib.  #  CHM.readdir     Function .  readdir(ptr::Ptr{CHMFile}, path::ASCIIString)  Read the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is \"/\". Returns the file and directory names.  #  CHM.resolve     Function .  resolve(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns  true  if  path  in the .chm file resolves to a file, else  false .  #  CHM.retrieve     Function .  retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns a string containing the contents of a text file at  path  within the .chm file.  #  CHM.unitinfo     Function .  unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)  Returns a  CHMUnitInfo  object for the file at  path  within the .chm file.", 
             "title": "Functions"
         }, 
         {

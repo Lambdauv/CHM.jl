@@ -125,7 +125,7 @@
       <div class="drawer">
         <nav aria-label="Navigation">
   
-  <a href="https://github.com/ajkeller34/CHM.jl" class="project">
+  <a href="https://github.com/PainterQubits/CHM.jl" class="project">
     <div class="banner">
       
       <div class="name">
@@ -137,7 +137,7 @@
         </strong>
         
           <br>
-          ajkeller34/CHM.jl
+          PainterQubits/CHM.jl
         
       </div>
     </div>
@@ -148,12 +148,12 @@
         <ul class="repo">
           <li class="repo-download">
             
-            <a href="https://github.com/ajkeller34/CHM.jl/archive/master.zip" target="_blank" title="Download" data-action="download">
+            <a href="https://github.com/PainterQubits/CHM.jl/archive/master.zip" target="_blank" title="Download" data-action="download">
               <i class="icon icon-download"></i> Download
             </a>
           </li>
           <li class="repo-stars">
-            <a href="https://github.com/ajkeller34/CHM.jl/stargazers" target="_blank" title="Stargazers" data-action="star">
+            <a href="https://github.com/PainterQubits/CHM.jl/stargazers" target="_blank" title="Stargazers" data-action="star">
               <i class="icon icon-star"></i> Stars
               <span class="count">&ndash;</span>
             </a>
@@ -254,43 +254,61 @@
 <h2 id="types">Types</h2>
 <p><a id='CHM.CHMFile' href='#CHM.CHMFile'>#</a>
 <strong><code>CHM.CHMFile</code></strong> &mdash; <em>Type</em>.</p>
-<hr />
+<div class="codehilite"><pre><span></span>type CHMFile
+</pre></div>
+
+
 <p>Custom type for dispatching only. Not needed by user.</p>
 <p><a id='CHM.CHMUnitInfo' href='#CHM.CHMUnitInfo'>#</a>
 <strong><code>CHM.CHMUnitInfo</code></strong> &mdash; <em>Type</em>.</p>
-<hr />
-<p>"Julia type wrapper for a C struct from CHMLib that contains information on\nmetadata for an object within the .chm file.\n"</p>
+<div class="codehilite"><pre><span></span>type CHMUnitInfo
+</pre></div>
+
+
+<p>Julia type wrapper for a C struct from CHMLib that contains information on metadata for an object within the .chm file.</p>
 <p><a id='Functions-1'></a></p>
 <h2 id="functions">Functions</h2>
 <p><a id='CHM.close' href='#CHM.close'>#</a>
 <strong><code>CHM.close</code></strong> &mdash; <em>Function</em>.</p>
-<hr />
-<p><code>close(ptr::Ptr{CHMFile})</code></p>
+<div class="codehilite"><pre><span></span>close(ptr::Ptr{CHMFile})
+</pre></div>
+
+
 <p>Close a file with CHMLib.</p>
 <p><a id='CHM.open' href='#CHM.open'>#</a>
 <strong><code>CHM.open</code></strong> &mdash; <em>Function</em>.</p>
-<hr />
-<p><code>open(path::ASCIIString)</code></p>
+<div class="codehilite"><pre><span></span>open(path::ASCIIString)
+</pre></div>
+
+
 <p>Open a file with CHMLib.</p>
 <p><a id='CHM.readdir' href='#CHM.readdir'>#</a>
 <strong><code>CHM.readdir</code></strong> &mdash; <em>Function</em>.</p>
-<hr />
-<p><code>readdir(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<div class="codehilite"><pre><span></span>readdir(ptr::Ptr{CHMFile}, path::ASCIIString)
+</pre></div>
+
+
 <p>Read the contents of a given directory in the CHM file. Use UNIX path conventions. Root level is "/". Returns the file and directory names.</p>
 <p><a id='CHM.resolve' href='#CHM.resolve'>#</a>
 <strong><code>CHM.resolve</code></strong> &mdash; <em>Function</em>.</p>
-<hr />
-<p><code>resolve(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<div class="codehilite"><pre><span></span>resolve(ptr::Ptr{CHMFile}, path::ASCIIString)
+</pre></div>
+
+
 <p>Returns <code>true</code> if <code>path</code> in the .chm file resolves to a file, else <code>false</code>.</p>
 <p><a id='CHM.retrieve' href='#CHM.retrieve'>#</a>
 <strong><code>CHM.retrieve</code></strong> &mdash; <em>Function</em>.</p>
-<hr />
-<p><code>retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<div class="codehilite"><pre><span></span>retrieve(ptr::Ptr{CHMFile}, path::ASCIIString)
+</pre></div>
+
+
 <p>Returns a string containing the contents of a text file at <code>path</code> within the .chm file.</p>
 <p><a id='CHM.unitinfo' href='#CHM.unitinfo'>#</a>
 <strong><code>CHM.unitinfo</code></strong> &mdash; <em>Function</em>.</p>
-<hr />
-<p><code>unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)</code></p>
+<div class="codehilite"><pre><span></span>unitinfo(ptr::Ptr{CHMFile}, path::ASCIIString)
+</pre></div>
+
+
 <p>Returns a <code>CHMUnitInfo</code> object for the file at <code>path</code> within the .chm file.</p>
           <aside class="copyright" role="note">
             
@@ -361,7 +379,7 @@
     </main>
     <script>
       var base_url = '..';
-      var repo_id  = 'ajkeller34/CHM.jl';
+      var repo_id  = 'PainterQubits/CHM.jl';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
     
